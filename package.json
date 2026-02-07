@@ -1,0 +1,31 @@
+{
+  "name": "example-with-drizzle",
+  "type": "module",
+  "scripts": {
+    "dev": "vinxi dev",
+    "build": "vinxi build",
+    "start": "vinxi start"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/better-sqlite3": "^7.6.10",
+    "@types/node": "^24.7.0",
+    "drizzle-kit": "^0.22.7",
+    "tailwindcss": "^4.1.18"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.17.0",
+    "@solidjs/router": "^0.15.0",
+    "@solidjs/start": "^1.1.0",
+    "better-sqlite3": "^11.0.0",
+    "clsx": "^2.1.1",
+    "drizzle-orm": "^0.31.2",
+    "solid-js": "^1.9.5",
+    "solid-transition-group": "^0.3.0",
+    "tailwind-merge": "^3.4.0",
+    "vinxi": "^0.5.7"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
