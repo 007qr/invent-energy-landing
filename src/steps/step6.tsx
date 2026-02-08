@@ -14,11 +14,13 @@ export default function Step6() {
   const submit = useAction(saveLeadData);
 
   const handleSaveFullName = async () => {
-    setLoading(true);
-    await submit(stepData).finally(() => {
-      setLoading(false);
-      next();
-    })
+    if (stepData.fullName.trim().length > 0) {
+      setLoading(true);
+      await submit(stepData).finally(() => {
+        setLoading(false);
+        next();
+      })
+    }
   }
 
 

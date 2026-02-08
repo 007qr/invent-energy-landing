@@ -94,5 +94,6 @@ async function getCityFromIp(ip: string | undefined) {
     city: data.city,
     region: data.region,
     country: data.country,
+    zip: data.zip
   };
 }

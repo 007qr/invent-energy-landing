@@ -1,9 +1,4 @@
-import {
-  createEffect,
-  createSignal,
-  onCleanup,
-  Show,
-} from "solid-js";
+import { createEffect, createSignal, onCleanup, onMount, Show } from "solid-js";
 import Button from "../components/Button";
 import { useStep } from "../context/step";
 import IconSpinner from "../components/icons/IconSpinner";
@@ -15,18 +10,32 @@ export default function Step4() {
   const { next } = useStep();
   const [stepData, { setAddress }] = useStepData();
   const [loading, setLoading] = createSignal(false);
+  const [submitDone, setSubmitDone] = createSignal(false);
+
   const submit = useAction(saveLeadData);
 
   const handleSaveAddress = async () => {
-    setLoading(true);
+    if (stepData.address.trim().length > 0) {
+      setLoading(true);
       await submit(stepData).finally(() => {
-        setLoading(false);
-        next();
-      })
+        setSubmitDone(true);
+      });
+    }
   };
 
   return (
-    <Show when={!loading()} fallback={<StepLoading />}>
+    <Show
+      when={!loading()}
+      fallback={
+        <StepLoading
+          onDone={() => {
+            if (submitDone()) {
+              next();
+            }
+          }}
+        />
+      }
+    >
       <div class="mt-10 absolute h-full flex-col items-center flex inset-0">
         <h3 class="text-[17px] leading-[100%] tracking-[-0.3px] font-medium text-center">
           Let’s calculate your savings
@@ -63,38 +72,40 @@ const MESSAGES = [
   "Almost done calculating...",
 ];
 
-function StepLoading() {
+function StepLoading(props: { onDone: () => void }) {
   const [cycleStep, setCycleStep] = createSignal(0);
   const [isVisible, setIsVisible] = createSignal(true);
-
-  createEffect(() => {
-    const interval = setInterval(() => {
+  onMount(() => {
+    let index = 0;
+    const run = () => {
+      if (index === MESSAGES.length - 1) {
+        props.onDone();
+        return;
+      }
       setIsVisible(false);
-
       setTimeout(() => {
-        setCycleStep((prev) => (prev + 1) % MESSAGES.length);
+        index += 1;
+        setCycleStep(index);
         setIsVisible(true);
+        setTimeout(run, 2000);
       }, 300);
-    }, 2000);
+    };
 
-    onCleanup(() => clearInterval(interval));
+    setTimeout(run, 2000);
   });
 
   return (
-    <>
-      <div class="mt-21 mx-auto flex items-center gap-3 flex-col absolute h-full inset-0">
-        <IconSpinner class="animate-spin" />
-        <div class="h-6 flex items-center justify-center min-w-50">
-          <span
-            class={`
-              block text-center font-medium transition-opacity duration-300 ease-in-out
-              ${isVisible() ? "opacity-100" : "opacity-0"}
-            `}
-          >
-            {MESSAGES[cycleStep()]}
-          </span>
-        </div>
+    <div class="mt-21 mx-auto flex items-center gap-3 flex-col absolute h-full inset-0">
+      <IconSpinner class="animate-spin" />
+      <div class="h-6 flex items-center justify-center min-w-50">
+        <span
+          class={`block text-center font-medium transition-opacity duration-300 ${
+            isVisible() ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          {MESSAGES[cycleStep()]}
+        </span>
       </div>
-    </>
+    </div>
   );
 }

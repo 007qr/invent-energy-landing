@@ -72,6 +72,7 @@ export function StepDataProvider(props: { children: any }) {
       setState("city", geoInfo()?.city);
       setState("region", geoInfo()?.region);
       setState("country", geoInfo()?.country);
+      setState("address", `${geoInfo()?.city}, ${geoInfo()?.region}, ${geoInfo()?.country}, ${geoInfo()?.zip}`)
     }
   })
 

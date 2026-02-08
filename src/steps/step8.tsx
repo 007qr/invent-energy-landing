@@ -1,5 +1,7 @@
 import { useStepData } from "~/context/StepDataContext";
 import Button from "../components/Button";
+import RadioIconFilled from "~/components/icons/IconRadioFilled";
+import IconCheckMark from "~/components/icons/IconCheckMark";
 
 export default function Step8() {
   const [stepData] = useStepData();
@@ -16,6 +18,32 @@ export default function Step8() {
                 Battery manufacturer. Made in {stepData.country || "USA"}.
               </p>
             </div>
+            <RadioIconFilled class="w-[21px] h-[21px]" />
+          </div>
+          <div class="flex flex-col gap-2">
+            <p class="underline text-[15px] leading-[130%] tracking-normal">
+              {stepData.city} Residents qualify for:
+            </p>
+            <div>
+              <span class="flex gap-1.5">
+                <IconCheckMark />
+                <p class="text-[15px] font-medium leading-[100%] tracking-normal h-[20px] flex items-center">
+                  Free power saving assessment
+                </p>
+              </span>
+              <span class="flex gap-1">
+                <IconCheckMark />
+                <p class="text-[15px] font-medium leading-[100%] tracking-normal h-[20px] flex items-center">
+                  Free on-site installation
+                </p>
+              </span>
+              <span class="flex gap-1">
+                <IconCheckMark />
+                <p class="text-[15px] font-medium leading-[100%] tracking-normal flex items-center h-[20px]">
+                  Free battery backup
+                </p>
+              </span>
+            </div>
           </div>
         </div>
 
@@ -30,7 +58,8 @@ export default function Step8() {
             <span class="text-[#1D7911] underline">
               586 residents saved 30%{" "}
             </span>{" "}
-            on average {stepData.city ? 'in ' + stepData.city : ''}. Save yours too! Limited spots.
+            on average {stepData.city ? "in " + stepData.city : ""}. Save yours
+            too! Limited spots.
           </span>
         </div>
 
@@ -45,9 +74,7 @@ export default function Step8() {
           <p>Book your call today.</p>
         </span>
 
-        <Button class="mt-13.75">
-          Book a call
-        </Button>
+        <Button class="mt-13.75">Book a call</Button>
       </div>
     </div>
   );
