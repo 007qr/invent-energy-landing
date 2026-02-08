@@ -14,7 +14,7 @@ export function StepProvider(props: {
   children: JSX.Element;
   initial?: number;
 }) {
-  const [step, setStep] = createSignal(props.initial ?? 4);
+  const [step, setStep] = createSignal(props.initial ?? 1);
 
   const next = () => setStep((s) => s + 1);
   const prev = () => setStep((s) => Math.max(1, s - 1));
