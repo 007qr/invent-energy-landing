@@ -1,16 +1,16 @@
-import { createEffect, createSignal } from "solid-js";
 import Button from "../components/Button";
 import { useStep } from "../context/step";
+import { useStepData } from "../context/StepDataContext";
 
 export default function Step5() {
   const { next } = useStep();
-
+  const [stepData] = useStepData();
   return (
     <div class="mx-auto absolute h-full inset-0 flex items-center flex-col">
-      <div class="w-[272px] mx-auto mt-[56px]">
+      <div class="w-68 mx-auto mt-14">
         <span class="text-center">
           <p class="text-[13px] leading-[140%] tracking-normal font-medium">
-            1772 Center Street NE —{" "}
+            {stepData.address}{" "}
           </p>
           <p class="text-[13px] leading-[140%] tracking-normal text-[#303030]">
             is eligible for up to{" "}
@@ -38,7 +38,7 @@ export default function Step5() {
           </span>
         </div>
       </div>
-      <Button class="mt-[70px]" onClick={() => next()}>
+      <Button class="mt-17.5" onClick={() => next()}>
         Unlock my Savings
       </Button>
     </div>

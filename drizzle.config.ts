@@ -1,9 +1,13 @@
-export default {
+import { defineConfig } from "drizzle-kit";
+
+export default defineConfig({
   dialect: "sqlite",
   schema: "./drizzle/schema.ts",
   out: "./drizzle/migrations/",
-  // driver: "better-sqlite",
+  driver: 'turso',
+  // driver: "libsql",
   dbCredentials: {
-    url: './drizzle/db.sqlite',
+      url: process.env.DATABASE_URL!,
+      authToken: process.env.DATABASE_AUTH_TOKEN,
   },
-};
+});

@@ -2,7 +2,7 @@ import { Accessor, createSignal, onCleanup, Setter } from "solid-js";
 
 export default function Slider(props: {
   value: Accessor<number>;
-  setValue: Setter<number>;
+  setValue: (ms: number) => void;
   max: number;
   min: number;
 }) {
