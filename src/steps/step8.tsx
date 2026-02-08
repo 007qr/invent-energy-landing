@@ -1,9 +1,8 @@
-import { createSignal } from "solid-js";
+import { useStepData } from "~/context/StepDataContext";
 import Button from "../components/Button";
-import { useStep } from "../context/step"; // Keep if 'next()' is still used, otherwise remove
-import { useStepData } from "../context/StepDataContext";
 
 export default function Step8() {
+  const [stepData] = useStepData();
   return (
     <div class="mt-5.5 absolute h-full inset-0 items-center flex flex-col">
       <div class="flex flex-col gap-5">
@@ -17,9 +16,7 @@ export default function Step8() {
                 Battery manufacturer. Made in USA.
               </p>
             </div>
-            {/* ... other elements ... */}
           </div>
-          {/* ... other elements ... */}
         </div>
 
         <div class="h-px w-full bg-[#0000001F]" />
@@ -33,7 +30,7 @@ export default function Step8() {
             <span class="text-[#1D7911] underline">
               586 residents saved 30%{" "}
             </span>{" "}
-            on average in Miami. Save yours too! Limited spots.
+            on average {stepData.city ? 'in ' + stepData.city : ''}. Save yours too! Limited spots.
           </span>
         </div>
 

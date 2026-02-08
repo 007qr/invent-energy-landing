@@ -10,7 +10,6 @@ import IconSpinner from "../components/icons/IconSpinner";
 import { useStepData } from "../context/StepDataContext";
 import { useAction } from "@solidjs/router";
 import { saveLeadData } from "~/actions/lead";
-import IconLoading from "~/components/icons/IconLoading";
 
 export default function Step4() {
   const { next } = useStep();
@@ -20,7 +19,7 @@ export default function Step4() {
 
   const handleSaveAddress = async () => {
     setLoading(true);
-      await submit(stepData, stepData.visitorId ?? '').finally(() => {
+      await submit(stepData).finally(() => {
         setLoading(false);
         next();
       })

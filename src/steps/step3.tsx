@@ -19,7 +19,7 @@ export default function Step3() {
       setHomeType(homeType);
     })
 
-    await submit(stepData, stepData.visitorId ?? '').finally(() => {
+    await submit(stepData).finally(() => {
       setLoading(false);
       next();
     });

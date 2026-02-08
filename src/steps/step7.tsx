@@ -1,4 +1,4 @@
-import { createEffect, createSignal, onCleanup, Show } from "solid-js";
+import { createEffect, createSignal, onCleanup, onMount, Show } from "solid-js";
 import Button from "../components/Button";
 import { useStep } from "../context/step";
 import FormatUtils from "../utils/format";
@@ -15,7 +15,7 @@ export default function Step7() {
 
   const handleSaveContact = async () => {
     setLoading(true);
-    await submit(stepData, stepData.visitorId ?? '').finally(() => {
+    await submit(stepData).finally(() => {
       setLoading(false);
       next();
     })
@@ -83,6 +83,7 @@ const MESSAGES = [
 function StepLoading() {
   const [cycleStep, setCycleStep] = createSignal(0);
   const [isVisible, setIsVisible] = createSignal(true);
+  const [stepData] = useStepData();
 
   createEffect(() => {
     const interval = setInterval(() => {
@@ -97,16 +98,20 @@ function StepLoading() {
     onCleanup(() => clearInterval(interval));
   });
 
+  onMount(() => {
+    if (stepData.city) {
+      MESSAGES[1] = `Searching for partners in ${stepData.city}...`;
+    } else {
+      MESSAGES[1] = 'Searching for partners';
+    }
+
+  })
+
   return (
     <>
-      <div class="mt-[84px] mx-auto flex items-center inset-0 gap-3 flex-col absolute h-full">
-        {/* Assuming IconSpinner is imported */}
+      <div class="mt-21 mx-auto flex items-center inset-0 gap-3 flex-col absolute h-full">
         <IconSpinner class="animate-spin" />
-
-        {/* h-6: Fixed height prevents the layout from collapsing/jumping
-                during the split second the text is swapping.
-        */}
-        <div class="h-6 flex items-center justify-center min-w-[200px]">
+        <div class="h-6 flex items-center justify-center min-w-50">
           <span
             class={`
               block text-center font-medium transition-opacity duration-300 ease-in-out

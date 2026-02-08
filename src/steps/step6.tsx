@@ -15,7 +15,7 @@ export default function Step6() {
 
   const handleSaveFullName = async () => {
     setLoading(true);
-    await submit(stepData, stepData.visitorId ?? '').finally(() => {
+    await submit(stepData).finally(() => {
       setLoading(false);
       next();
     })
@@ -45,7 +45,7 @@ export default function Step6() {
           class="border border-[#00000029] w-83 h-13 rounded-[48px] py-4 px-3 text-[13px] text-ellipsis"
         />
       </div>
-      <Button onClick={handleSaveFullName} disabled={loading()}>
+      <Button onClick={handleSaveFullName} disabled={loading()}  class="flex items-center justify-center gap-2">
         <Show when={!loading()} fallback={<IconLoading class="w-6 h-6"/>}>
           Calculate Savings
         </Show>

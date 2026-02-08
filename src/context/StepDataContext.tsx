@@ -1,7 +1,8 @@
 import { createContext, useContext, createEffect, onMount } from "solid-js";
 import { createStore } from "solid-js/store";
-import { saveLeadData } from "../actions/lead";
+import { getGeoInfo, saveLeadData } from "../actions/lead";
 import FingerprintJS from "@fingerprintjs/fingerprintjs";
+import { createAsync } from "@solidjs/router";
 
 export type StepDataContextState = {
   powerBill: number;
@@ -54,6 +55,8 @@ export function StepDataProvider(props: { children: any }) {
     phone: "",
   });
 
+  const geoInfo = createAsync(async ()=> getGeoInfo());
+
   // Load fingerprint on component mount
   onMount(() => {
     const getVisitorId = async () => {
@@ -63,6 +66,14 @@ export function StepDataProvider(props: { children: any }) {
     };
     getVisitorId();
   });
+
+  createEffect(() =>{
+    if (geoInfo()) {
+      setState("city", geoInfo()?.city);
+      setState("region", geoInfo()?.region);
+      setState("country", geoInfo()?.country);
+    }
+  })
 
   const actions = {
     setPowerBill(powerBill: number) { setState("powerBill", powerBill); },

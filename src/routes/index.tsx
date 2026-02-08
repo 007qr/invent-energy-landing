@@ -11,15 +11,18 @@ import Step7 from "../steps/step7";
 import Step8 from "../steps/step8";
 
 import { useStep } from "../context/step";
+import { useStepData } from "~/context/StepDataContext";
 
 const App: Component = () => {
   const { step } = useStep();
+  const [stepData] = useStepData();
   return (
     <>
-      <div class="font-instrument-sans mt-[44px] overflow-hidden w-[393px] mx-auto flex flex-col items-center justify-center">
-        <div class="w-[267px] mx-auto flex flex-col gap-1">
+      <div class="font-instrument-sans mt-11 overflow-hidden w-98.25 mx-auto flex flex-col items-center justify-center">
+        <div class="w-66.75 mx-auto flex flex-col gap-1">
           <p class="font-instrument-serif text-[17px] leading-[100%] italic text-center">
-            Miami Exclusive
+            {stepData.city} {' '}
+            Exclusive
           </p>
           <p class="text-xl font-bold text-[21px] leading-[120%] tracking-normal text-center">
             <Show
@@ -30,8 +33,7 @@ const App: Component = () => {
             </Show>
           </p>
         </div>
-        <div class="w-full mt-[22px] h-px bg-[#0000001F]" />
-
+        <div class="w-full mt-5.5 h-px bg-[#0000001F]" />
         <div class="relative w-full h-[95vh]">
           <TransitionGroup name="slide-fade">
             <Switch>

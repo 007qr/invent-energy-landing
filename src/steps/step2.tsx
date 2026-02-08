@@ -18,7 +18,7 @@ export default function Step2() {
       setOwnHome(ownedHome);
     })
 
-    await submit(stepData, stepData.visitorId ?? '').finally(() => {
+    await submit(stepData).finally(() => {
       setLoading(false);
       next();
     });

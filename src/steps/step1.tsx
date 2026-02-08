@@ -1,10 +1,10 @@
 import { createSignal, Show } from "solid-js";
 import Button from "../components/Button";
-import { useStep } from "../context/step";
 import Slider from "../components/Slider";
 import { useStepData } from "../context/StepDataContext";
-import { saveLeadData } from "~/actions/lead";
+import { useStep } from "../context/step";
 import { useAction } from "@solidjs/router";
+import { saveLeadData } from "~/actions/lead";
 import IconLoading from "~/components/icons/IconLoading";
 
 export default function Step1() {
@@ -15,7 +15,7 @@ export default function Step1() {
 
   const handleCheckSavings = async () => {
     setLoading(true);
-    await submit(stepData, stepData.visitorId ?? '').finally(() => { setLoading(false); next() });
+    await submit(stepData).finally(() => { setLoading(false); next() });
   };
 
   return (
