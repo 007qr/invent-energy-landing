@@ -13,7 +13,7 @@ export default function Step8() {
                 Invent Energy
               </h4>
               <p class="text-[13px] leading-[130%] tracking-normal">
-                Battery manufacturer. Made in USA.
+                Battery manufacturer. Made in {stepData.country || "USA"}.
               </p>
             </div>
           </div>
@@ -39,7 +39,7 @@ export default function Step8() {
       <div class="mt-18.5 w-87">
         <span class="text-[15px] leading-[120%] font-medium text-center">
           <p>
-            Vish, due to high demand, only{" "}
+            {stepData.fullName}, due to high demand, only{" "}
             <span class="text-[#C42323] underline">12 spots left.</span>
           </p>
           <p>Book your call today.</p>
