@@ -84,7 +84,7 @@ async function getCityFromIp(ip: string | undefined) {
   }
 
   const res = await fetch(
-    `https://ipinfo.io/${ip}?token=${process.env.IPINFO_TOKEN}`,
+    `http://ip-api.com/json/${ip}`,
   );
 
   if (!res.ok) return null;
