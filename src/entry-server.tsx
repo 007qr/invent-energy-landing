@@ -19,6 +19,7 @@ export default createHandler(() => (
               href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&display=swap"
               rel="stylesheet"
           />
+          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrUOotLGNqj5zzZAIx0QgWhFcgmz7h8W0&libraries=places&callback=initMap" async={true} />
           {assets}
         </head>
         <body>
